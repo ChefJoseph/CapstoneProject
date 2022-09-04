@@ -1,0 +1,145 @@
+  [1m[35m (459.6ms)[0m  [1m[35mCREATE DATABASE "Stadium_2_DB_development" ENCODING = 'unicode'[0m
+  [1m[35m (127.8ms)[0m  [1m[35mCREATE DATABASE "Stadium_2_DB_test" ENCODING = 'unicode'[0m
+  [1m[35m (46.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (32.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2397985541073686025)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateProducts (20220903223641)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (39.1ms)[0m  [1m[35mCREATE TABLE "products" ("id" bigserial primary key, "category" character varying, "product_name" character varying, "product_image_url" character varying, "description" character varying, "price" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220903223641"]]
+  [1m[36mTRANSACTION (20.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateOrders (20220903223848)
+  [1m[36mTRANSACTION (24.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (8.2ms)[0m  [1m[35mCREATE TABLE "orders" ("id" bigserial primary key, "user_id" integer, "product_id" integer, "sales_tax" integer, "fees" integer, "tips" integer, "total_price" integer, "order_number" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220903223848"]]
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseCreateUsers (20220903224002)
+  [1m[36mTRANSACTION (41.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (41.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp(6), "remember_created_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220903224002"]]
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (27.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-09-03 22:43:30.824442"], ["updated_at", "2022-09-03 22:43:30.824442"]]
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(2397985541073686025)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2397985541073686025)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddRoleToUser (20220903224415)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "users" ADD "role" integer DEFAULT 0[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220903224415"]]
+  [1m[36mTRANSACTION (29.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(2397985541073686025)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (2.7ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "joe@gmail.com"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (3.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (4.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (87.4ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Food"], ["product_name", "Hot dog"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.335212"], ["updated_at", "2022-09-03 22:48:56.335212"]]
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (1.9ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Food"], ["product_name", "Hamburger"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.446697"], ["updated_at", "2022-09-03 22:48:56.446697"]]
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (3.3ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Food"], ["product_name", "Pizza"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.456786"], ["updated_at", "2022-09-03 22:48:56.456786"]]
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (1.8ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Food"], ["product_name", "Corn dog"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.471903"], ["updated_at", "2022-09-03 22:48:56.471903"]]
+  [1m[36mTRANSACTION (5.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.5ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Food"], ["product_name", "Nachos"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.523897"], ["updated_at", "2022-09-03 22:48:56.523897"]]
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (1.3ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Food"], ["product_name", "Chicken sandy"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.535375"], ["updated_at", "2022-09-03 22:48:56.535375"]]
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (1.2ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Food"], ["product_name", "Salad"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.543680"], ["updated_at", "2022-09-03 22:48:56.543680"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.6ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Food"], ["product_name", "Chicken Tendy"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.550730"], ["updated_at", "2022-09-03 22:48:56.550730"]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (4.0ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Food"], ["product_name", "Brisket Sandy"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.559215"], ["updated_at", "2022-09-03 22:48:56.559215"]]
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.6ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Food"], ["product_name", "Wings"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.571289"], ["updated_at", "2022-09-03 22:48:56.571289"]]
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.5ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Drink"], ["product_name", "Beer"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.580236"], ["updated_at", "2022-09-03 22:48:56.580236"]]
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.8ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Drink"], ["product_name", "Wine"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.588119"], ["updated_at", "2022-09-03 22:48:56.588119"]]
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (1.0ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Drink"], ["product_name", "Soda"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.599907"], ["updated_at", "2022-09-03 22:48:56.599907"]]
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (5.4ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Drink"], ["product_name", "Cocktail"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.608487"], ["updated_at", "2022-09-03 22:48:56.608487"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.5ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Drink"], ["product_name", "Water"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.620829"], ["updated_at", "2022-09-03 22:48:56.620829"]]
+  [1m[36mTRANSACTION (10.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (14.5ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Drink"], ["product_name", "Juice"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.641078"], ["updated_at", "2022-09-03 22:48:56.641078"]]
+  [1m[36mTRANSACTION (7.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (1.3ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Snack"], ["product_name", "Fries"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.678010"], ["updated_at", "2022-09-03 22:48:56.678010"]]
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.6ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Snack"], ["product_name", "Garlic fries"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.686883"], ["updated_at", "2022-09-03 22:48:56.686883"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.5ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Snack"], ["product_name", "Nachos"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.693718"], ["updated_at", "2022-09-03 22:48:56.693718"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.5ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Snack"], ["product_name", "Onion rings"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.702355"], ["updated_at", "2022-09-03 22:48:56.702355"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (2.0ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Snack"], ["product_name", "Cotton candy"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.709370"], ["updated_at", "2022-09-03 22:48:56.709370"]]
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.4ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Snack"], ["product_name", "Peanuts"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.718814"], ["updated_at", "2022-09-03 22:48:56.718814"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.4ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Snack"], ["product_name", "Popcorn"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.724757"], ["updated_at", "2022-09-03 22:48:56.724757"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.4ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Snack"], ["product_name", "Cookies"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.731077"], ["updated_at", "2022-09-03 22:48:56.731077"]]
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.5ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Snack"], ["product_name", "Ice cream"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.736256"], ["updated_at", "2022-09-03 22:48:56.736256"]]
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.8ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Snack"], ["product_name", "Milkshake"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.742772"], ["updated_at", "2022-09-03 22:48:56.742772"]]
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.5ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Merch"], ["product_name", "Jersey"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.749933"], ["updated_at", "2022-09-03 22:48:56.749933"]]
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.4ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Merch"], ["product_name", "Shirt"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.756249"], ["updated_at", "2022-09-03 22:48:56.756249"]]
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.5ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Merch"], ["product_name", "Cap"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.762718"], ["updated_at", "2022-09-03 22:48:56.762718"]]
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.4ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Merch"], ["product_name", "Sweater"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.768421"], ["updated_at", "2022-09-03 22:48:56.768421"]]
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.4ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Merch"], ["product_name", "Accessories"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.773349"], ["updated_at", "2022-09-03 22:48:56.773349"]]
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProduct Create (0.4ms)[0m  [1m[32mINSERT INTO "products" ("category", "product_name", "product_image_url", "description", "price", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["category", "Merch"], ["product_name", "Memorabilia"], ["product_image_url", ""], ["description", ""], ["price", 8], ["created_at", "2022-09-03 22:48:56.779461"], ["updated_at", "2022-09-03 22:48:56.779461"]]
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/auth/sign_in" for ::1 at 2022-09-03 18:49:24 -0400
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [POST] "/auth/sign_in"):
+  
