@@ -1,6 +1,7 @@
 class Api::V1::OrdersController < ApplicationController
-  before_action :set_order, only: %i[ show update destroy ]
-
+  # before_action :set_order, only: %i[ show update destroy ]
+  before_action :authenticate_user!, only: %i[create update]
+  before_action :find_product, only: %i[create update]
   # GET /orders
   def index
     @orders = Order.all
@@ -14,23 +15,35 @@ class Api::V1::OrdersController < ApplicationController
   end
 
   # POST /orders
-  def create
-    @order = Order.new(order_params)
+  # def create
+  #   @order = Order.new(order_params)
+  #   @order.user_id = current_user.id 
 
-    if @order.save
-      render json: @order, status: :created, location: api_v1_orders_url(@order)
-    else
-      render json: @order.errors, status: :unprocessable_entity
-    end
+  #   if @order.save
+  #     render json: @order, status: :created, location: api_v1_orders_url(@orders)
+  #   else
+  #     render json: @order.errors, status: :unprocessable_entity
+  #   end
+  # end
+  def create
+    order = current_user.orders.create
+    order.items.create(product: @product)
+    render json: { message: 'Your order was created...', order: {id: order.id} }, status: 201
   end
 
   # PATCH/PUT /orders/1
+  # def update
+  #   if @order.update(order_params)
+  #     render json: @order
+  #   else
+  #     render json: @order.errors, status: :unprocessable_entity
+  #   end
+  # end
+
   def update
-    if @order.update(order_params)
-      render json: @order
-    else
-      render json: @order.errors, status: :unprocessable_entity
-    end
+    order = Order.find(params[:id])
+    order.items.create(product: @product)
+    render json: { message: 'Your order was updated...' }
   end
 
   # DELETE /orders/1
@@ -45,7 +58,10 @@ class Api::V1::OrdersController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def order_params
-      params.require(:order).permit(:user_id, :product_id, :sales_tax, :fees, :tips, :total_price, :order_number)
+    # def order_params
+    #   params.require(:order).permit(:users_attributes => [:email, :first_name, :last_name, :password, :mobile] :product_id, :sales_tax, :fees, :tips, :total_price, :order_number)
+    # end
+    def find_product
+      @product = Product.find(params[:product_id])
     end
 end

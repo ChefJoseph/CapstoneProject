@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
 
 protected
     def configure_permitted_parameters
-        devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :email, :mobile, :password, :password_confirmation, :avatar_url, :license_image_url])
+        devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :email, :mobile, :password, :password_confirmation, :avatar_url, :license_image_url, :registration])
     end
 #   def cors_set_access_control_headers
 #     headers['Access-Control-Allow-Origin'] = 'http://localhost:3001'

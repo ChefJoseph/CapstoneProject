@@ -2,6 +2,11 @@
   "dependencies": {
     "axios": "^0.27.2",
     "devise": "^1.0.9",
-    "ruby": "^0.6.1"
+    "react-native-bottom-search-bar": "^1.0.0",
+    "react-native-bouncy-checkbox": "^3.0.4",
+    "react-native-dynamic-vector-icons": "^1.2.0",
+    "react-native-helpers": "^0.0.2",
+    "ruby": "^0.6.1",
+    "tslib": "^2.4.0"
   }
 }
