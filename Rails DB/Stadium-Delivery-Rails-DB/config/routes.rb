@@ -13,8 +13,10 @@ Rails.application.routes.draw do
         resources :orders
     
       end
+
       # post "/new_orders", to: "api/v1/orders#create"
   # post "/auth/sign_in", to: "api/v1/users#create"
   # post "/auth/sign_in", to: "api/v1/devise_token_auth/sessions#create"
 end
+root 'pages#home'
 end

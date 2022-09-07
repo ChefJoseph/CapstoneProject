@@ -4,7 +4,7 @@ User.first_or_create(
     password: 'joejoe',
     password_confirmation: 'joejoe')
 
-Product.create!(category:"Food", product_name: "Hot dog", product_image_url: "", description: "", price: 8.00)
+Product.create!(category:"Food", product_name: "Hot dog", product_image_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Hot_dog_with_mustard.png/1280px-Hot_dog_with_mustard.png", description: "", price: 8.00)
 Product.create!(category:"Food", product_name: "Hamburger", product_image_url: "", description: "", price: 8.00)
 Product.create!(category:"Food", product_name: "Pizza", product_image_url: "", description: "", price: 8.00)
 Product.create!(category:"Food", product_name: "Corn dog", product_image_url: "", description: "", price: 8.00)
