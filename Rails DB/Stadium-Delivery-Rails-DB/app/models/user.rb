@@ -1,7 +1,6 @@
 class User < ApplicationRecord
 
     has_many :orders
-    has_many :products, through: :orders
 
     extend Devise::Models
     # # Include default devise modules. Others available are:

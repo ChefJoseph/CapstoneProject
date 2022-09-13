@@ -1,8 +1,25 @@
 puts "seeding"
 User.first_or_create( 
+    first_name: 'Joe',
+    last_name: 'Hirotsu',
     email: 'joe@gmail.com',
+    mobile: '3107802359',
     password: 'joejoe',
     password_confirmation: 'joejoe')
+
+# Order.create!(
+#     user_id: 1,
+#     products: [
+        
+#         {
+#             product_id: 1
+#         },
+#         {
+#             product_id: 2
+#         },
+#     ]
+#     total_price: 8
+# )
 
 Product.create!(category:"Food", product_name: "Hot dog", product_image_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Hot_dog_with_mustard.png/1280px-Hot_dog_with_mustard.png", description: "", price: 8.00)
 Product.create!(category:"Food", product_name: "Hamburger", product_image_url: "", description: "", price: 8.00)

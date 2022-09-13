@@ -18,7 +18,7 @@ class Api::V1::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user, status: :created, location: api_v1_users_url(@users)
+      render json: @user, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -46,6 +46,6 @@ class Api::V1::UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:first_name, :last_name, :email, :mobile, :password, :password_confirmation, :avatar_url, :license_image_url, registration: {:first_name, :last_name, :email, :mobile, :password, :password_confirmation, :avatar_url, :license_image_url})
+      params.permit(:first_name, :last_name, :email, :mobile, :password, :password_confirmation, :avatar_url, :license_image_url)
     end
 end

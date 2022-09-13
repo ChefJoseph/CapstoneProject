@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :orderproducts
   
  
     namespace :api do
@@ -6,7 +7,8 @@ Rails.application.routes.draw do
         mount_devise_token_auth_for 'User', at: 'auth',
   controllers: {
     sessions: 'api/v1/sessions',
-    registrations: 'devise_token_auth/registrations'
+    registrations: 'devise_token_auth/registrations',
+    
   }
         resources :products
         resources :users

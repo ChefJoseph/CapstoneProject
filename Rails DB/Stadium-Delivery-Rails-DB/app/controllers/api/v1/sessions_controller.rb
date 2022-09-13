@@ -4,7 +4,7 @@ class Api::V1::SessionsController < DeviseTokenAuth::SessionsController
           # Unpermitted parameter: session
           wrap_parameters format: []
           before_action :set_user_by_token, only: [:destroy]
-          after_action :reset_session, only: [:destroy]
+          # after_action :reset_session, only: [:destroy]
       
           def new
             render_new_error
