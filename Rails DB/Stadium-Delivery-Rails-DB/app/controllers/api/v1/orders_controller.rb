@@ -5,7 +5,7 @@ class Api::V1::OrdersController < ApplicationController
   # before_action :find_product, only: %i[create update]
   # GET /orders
   def index
-    @orders = Order.all
+    @orders = Order.all.order(created_at: :desc)
 
     render json: @orders
   end

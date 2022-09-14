@@ -12247,3 +12247,47 @@ Processing by Api::V1::OrdersController#index as */*
 Completed 200 OK in 123ms (Views: 115.9ms | ActiveRecord: 6.3ms | Allocations: 40737)
 
 
+Started POST "/api/v1/auth/sign_in" for ::1 at 2022-09-14 16:53:06 -0400
+  [1m[35m (3.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (2.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::SessionsController#create as HTML
+  Parameters: {"email"=>"Joe@gmail.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? AND "users"."provider" = ? LIMIT ?[0m  [["email", "joe@gmail.com"], ["provider", "email"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/sessions_controller.rb:21:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/sessions_controller.rb:139:in `create_and_assign_token'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ? [0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/sessions_controller.rb:139:in `create_and_assign_token'
+  [1m[36mUser Update (1.9ms)[0m  [1m[33mUPDATE "users" SET "tokens" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["tokens", "[FILTERED]"], ["updated_at", "2022-09-14 20:53:07.572989"], ["id", 1]]
+  ↳ app/controllers/api/v1/sessions_controller.rb:141:in `block in create_and_assign_token'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/sessions_controller.rb:139:in `create_and_assign_token'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.12ms)
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 394ms (Views: 3.8ms | ActiveRecord: 6.8ms | Allocations: 33264)
+
+
+Started GET "/api/v1/auth/validate_token?uid=joe%40gmail.com&client=z8oSSbr7UJcHSr0Wd2H2Qg&access-token=[FILTERED]" for ::1 at 2022-09-14 16:53:07 -0400
+Processing by DeviseTokenAuth::TokenValidationsController#validate_token as HTML
+  Parameters: {"uid"=>"joe@gmail.com", "client"=>"z8oSSbr7UJcHSr0Wd2H2Qg", "access-token"=>"[FILTERED]"}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."uid" = ? LIMIT ?[0m  [["uid", "joe@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+[active_model_serializers] Rendered ActiveModel::Serializer::Null with Hash (0.17ms)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 72ms (Views: 2.4ms | ActiveRecord: 1.7ms | Allocations: 3185)
+
+
+Started GET "/api/v1/products" for ::1 at 2022-09-14 16:53:07 -0400
+Processing by Api::V1::ProductsController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:8:in `current_user'
+  [1m[36mProduct Load (1.5ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/controllers/api/v1/products_controller.rb:9:in `index'
+No serializer found for resource: #<Product id: 1, category: "Food", product_name: "Hot dog", product_image_url: "https://upload.wikimedia.org/wikipedia/commons/thu...", description: "", price: 8, created_at: "2022-09-13 14:07:33.514242000 +0000", updated_at: "2022-09-13 14:07:33.514242000 +0000">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Product::ActiveRecord_Relation (53.89ms)
+Completed 200 OK in 177ms (Views: 74.5ms | ActiveRecord: 2.8ms | Allocations: 12535)
+
+
